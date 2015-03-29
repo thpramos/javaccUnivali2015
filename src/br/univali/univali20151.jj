@@ -1,0 +1,64 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */options{  static = false;}PARSER_BEGIN(UNIVALI1)
+package br.univali;
+
+import java.io.*;
+import java.util.ArrayList;
+
+public class UNIVALI1{
+	}PARSER_END(UNIVALI1)SKIP :{  " "| "\r"| "\t"| "\n"| < COMMENT : "--" (~[ "\n", "\r" ])*  (  "\n"  | "\r" | "\r\n" )? >| < COMMENT_BLOCK : "-/" (~[ ])* "/-" >  //| "//" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?
+  //Fazer description
+}
+
+//SPECIAL_TOKEN://{//  < LEXICAL_INVALIDO://  	(~ [// 	 "a"-"z", "A"-"Z",// 	 "0"-"9",// 	 "[",// 	 "]",// 	 "(",// 	 ")",// 	 ".",// 	 ",",// 	 "=",// 	 "+",// 	 "-",// 	 "*",// 	 "/",// 	 "%",// 	 "!",// 	 "<",// 	 ">",// 	 "&",// 	 "|",// 	 "!",// 	 " ",// 	 "\t",// 	 "\n",// 	 "\r",// 	 "\f"// 	 ]) >//  {//	System.err.println("Linha "+input_stream.getEndLine() + " - Entrada com simbolo inválido: " + image);//  }//| < IDENTIFICADOR_INVALIDO: (["0"-"9"]((["a"-"z","A"-"Z"])+) | "_")//		| ((["a"-"z","A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"]))//		| ((["a"-"z","A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"](["0"-"9"])+ | "_"("_")+))//		| ((["A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"]))//		| ((["A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"](["0"-"9"])+ | "_"("_")+))>//  {//  System.err.println("Linha "+input_stream.getEndLine() + " - Identificador invalido: " + image);//  }////}TOKEN :{  < CONSTANTE_NUMERICA_INTEIRA : < DIGIT > (< DIGIT >)? (< DIGIT >)? (< DIGIT >)? (< DIGIT >)? >| < CONSTANTE_NUMERICA_REAL :    (      < DIGIT > (< DIGIT >)? (< DIGIT >)? (< DIGIT >)? (< DIGIT >)? "." < DIGIT > (< DIGIT >)? (< DIGIT >)?    ) >| < #LETTER : [ "a"-"z", "A"-"Z" ] >| < #DIGIT : [ "0"-"9" ] >}TOKEN [ IGNORE_CASE ] : /*EXPRESSAO REGULAR*/{  < EXPRESSAO_REGULAR :    (      < DO >    | < THIS >    | < BODY >    | < SECTION >    | < DESCRIPTION >    | < DECLARATION >    | < DESIGNATE >    | < AS >    | < TO >    | < READ >    | < WRITE >    | < AVALIATE >    | < TRUE >    | < UNTRUE >    | < RESULT >    | < ALL >    | < CONSTANT >    | < VARIABLE >    | < IS >    | < TIPO >    | < VALOR >    | < INTEGER >    | < FLOAT >    | < STRING >    | < BOOLEAN >    | < CONCHETEE >    | < CONCHETED >    | < PARENTESEE >    | < PARENTESED >    | < PONTO >    ) >}TOKEN :{  < SIMBOLOS :    (      < CONCHETEE >    | < CONCHETED >    | < PONTO >    | < PARENTESEE >    | < PARENTESED >    ) >}TOKEN [ IGNORE_CASE ] : //EXPRESSOES REGULARES
+{  < DO : "do" >| < THIS : "this" >| < BODY : "body" >| < SECTION : "section" >| < DESCRIPTION : "description" >| < DECLARATION : "declaration" >| < DESIGNATE : "designate" >| < AS : "as" >| < TO : "to" >| < READ : "read" >| < WRITE : "write" >| < AVALIATE : "avaliate" >| < TRUE : "true" >| < UNTRUE : "untrue" >| < RESULT : "result" >| < ALL : "all" >| < CONSTANT : "constant" >| < VARIABLE : "variable" >| < IS : "is" >| <TIPO : (<STRING>|<INTEGER>|<FLOAT>|<BOOLEAN>) >
+| <VALOR : (<STRING>|<INTEGER>|<FLOAT>) >| < INTEGER : "integer" >| < STRING : "string" >| < FLOAT : "float" >| < BOOLEAN : "boolean" >| < CONCHETEE : "[" >| < CONCHETED : "]" >| < PARENTESEE : "(" >| < PARENTESED : ")" >| < PONTO : "." >}TOKEN : /*CONSTANTE LITERAL*/{   <CONSTANTE_LITERAL : ("\""(~[])*"\""|"'"(~[])*"'")> }TOKEN : /*IDENTIFICADOR*//*< IDENTIFICADOR : <LETTER>(<LETTER>|"_"(<LETTER>|<DIGIT>(<LETTER>|"_"))|<DIGIT>
+  		  (<LETTER>|"_"))*|"_"(<LETTER>|<DIGIT>(<LETTER>|"_"))*>*///{//  < #LETTERM : [ "A"-"Z" ] >//| < IDENTIFICADOR : < LETTERM > (< ID >)* ("_")? >//| < ID : ( < LETTERM > | < UNDER > | < DIGIT > (< DIGIT >)? ( < LETTER > | < UNDER >) ) >//| < UNDER :  "_" (  < LETTER > | < DIGIT > (< DIGIT >)? ( < LETTER >  )  ) >//}
+
+{
+ <#LETTERM : ["A"-"Z" ] >
+| < IDENTIFICADOR : <LETTERM> (<ID>)*("_" )? >
+| <# ID : (< LETTER ><DIGIT > | < LETTER > |<UNDER>|< DIGIT > (< LETTER > | < UNDER >)) >
+| <# UNDER : "_" (<LETTER> |<DIGIT>) >
+}TOKEN : //OPERADOR
+{  < OPERADOR :    < OPERADOR_ARITMETICO >  | < OPERADOR_RELACIONAL >  | < OPERADOR_LOGICO >>}TOKEN : /*OPERADOR ARITMETICO*/{  < OPERADOR_ARITMETICO :    (      "+"    | "-"    | "*"    | "/"    | "**"    | "%"    | "%%"    ) >}TOKEN : /*OPERADOR RELACIONAL*/{  < OPERADOR_RELACIONAL :    (      "=="    | "!="    | "<<"    | ">>"    | "<<="    | ">>="    ) >}TOKEN : /*OPERADOR LOGICO*/{  < OPERADOR_LOGICO :    (      "&"    | "|"    | "!"    ) >}
+
+String input() :
+{
+StringBuilder s = new StringBuilder("");
+}
+{
+	try
+	{ 
+	  (identifica(s))*	  {
+	    return s.toString();
+	  }
+	} catch (TokenMgrError e) {
+		error_skipto(PONTO);
+	}catch (ParseException e) {
+    	error_skipto(PONTO);
+  	}
+  	
+  
+}
+
+
+
+
+
+
+JAVACODE
+void error_skipto(int kind) {
+  ParseException e = generateParseException();  // generate the exception object.
+  System.out.println(e.toString());  // print the error message
+  Token t;
+  do {
+    t = getNextToken();
+  } while (t.kind != kind);
+    // The above loop consumes tokens all the way up to a token of
+    // "kind".  We use a do-while loop rather than a while because the
+    // current token is the one immediately before the erroneous token
+    // (in our case the token immediately before what should have been
+    // "if"/"while".
+}void identifica(StringBuilder s) :{  Token k;}{  k = < EXPRESSAO_REGULAR >  {    s.append("\n Palavra reservada -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < CONSTANTE_NUMERICA_INTEIRA >  {    s.append("\n Constante inteira -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < CONSTANTE_NUMERICA_REAL >  {    s.append("\n Constante real -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < CONSTANTE_LITERAL >  {    s.append("\n Constante literal -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < IDENTIFICADOR >  {     s.append("\n Identificador -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < OPERADOR >  {    s.append("\n Operador -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < SIMBOLOS >  {    s.append("\n Simbolo Especial -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }}
