@@ -7,22 +7,18 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class UNIVALI1{
-	}PARSER_END(UNIVALI1)SKIP :{  " "| "\r"| "\t"| "\n"| < COMMENT : "--" (~[ "\n", "\r" ])*  (  "\n"  | "\r" | "\r\n" )? >| < COMMENT_BLOCK : "-/" (~[ ])* "/-" >  //| "//" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?
+	}PARSER_END(UNIVALI1)SKIP :{  " "| "\r"| "\t"| "\n"| < COMMENT : "--" (~[ "\n", "\r" ])*  (  "\n"  | "\r" | "\r\n" )? >| < COMMENT_BLOCK : "-/" (~[])* "/-" >  //| "//" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?
   //Fazer description
 }
 
 TOKEN:{  < LEXICAL_INVALIDO:  	(~ [ 	 "a"-"z", "A"-"Z", 	 "0"-"9", 	 "[", 	 "]", 	 "(", 	 ")", 	 ".", 	 ",", 	 "=", 	 "+", 	 "-", 	 "*", 	 "/", 	 "%", 	 "!", 	 "<", 	 ">", 	 "&", 	 "|", 	 "!", 	 " ", 	 "\t", 	 "\n", 	 "\r", 	 "\f" 	 ])+ >
  | < IDENTIFICADOR_INVALIDO: (
  		(["0"-"9"](["a"-"z","A"-"Z","_","0"-"9"])+) /*Começa com números*/
-		|((["a"-"z","A"-"Z","0"-"9"])+ "_""_" (["a"-"z","A"-"Z","0"-"9"])+) //underlines consecutivos
-		|((["a"-"z","A"-"Z","_"])+ ["0"-"9"] (["a"-"z","A"-"Z","_"])+) //numeros consecutivos
- ) >
+		|((["a"-"z","A"-"Z","0"-"9"])+ "_""_" (["a"-"z","A"-"Z","0"-"9"])+) /*underlines consecutivos*/
+		|((["a"-"z","A"-"Z","_"])+ ["0"-"9"] (["a"-"z","A"-"Z","_"])+)) > /*numeros consecutivos*/
+ | < CONSTANTE_INVALIDA:
+ 	"\""(~["\n","\r","\""])*["\n","\r"] >
 		//|(["a"-"z"](~["do","this","body","section"])+) //começa com minusculas IMPOSSIVEL
-
-//<DO : "do", "this","body", "section" >//| <DESCRIPTION : "description" >//| <DECLARATION : "declaration" >//| <DESIGNATE : "designate" >//| <AS : "as" >//| <TO : "to" >//| <READ : "read">//| <WRITE : "write">//| <AVALIATE : "avaliate">//| <TRUE : "true">//| <UNTRUE: "untrue">//| <RESULT : "result">//| <REPEAT : "repeat">//| <VIRGULA : ",">//| <ALL : "all">//| <CONSTANT : "constant" >//| <VARIABLE : "variable">//| <IS : "is">//| <TIPO : (<STRING>|<INTEGER>|<FLOAT>|<BOOLEAN>) >//| <VALOR : (<STRING>|<INTEGER>|<FLOAT>) >//| <INTEGER : "integer" >//| <STRING : "string" >//| <FLOAT : "float" >//| <BOOLEAN : "boolean" >//| <CONCHETEE : "[">//| <CONCHETED : "]">//| <PARENTESEE : "(">//| <PARENTESED : ")">//| <PONTO : ".">//| <IGUAL : "=">
-
-
-
 
  
 //  {//  System.err.println("Linha "+input_stream.getEndLine() + " - Identificador invalido: " + image);//  }/*| (((["a"-"z"])+(["a"-"z","A"-"Z","0"-"9"])*("_")?)) Começa com letra minuscula*/		//| ("_") /*Apenas um underline*/	//| < IDENTIFICADOR_INVALIDO: (["0"-"9"]((["a"-"z","A"-"Z"])+) | "_")//		| ((["a"-"z","A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"]))//		| ((["a"-"z","A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"](["0"-"9"])+ | "_"("_")+))//		| ((["A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"]))//		| ((["A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"](["0"-"9"])+ | "_"("_")+))>//  {//  System.err.println("Linha "+input_stream.getEndLine() + " - Identificador invalido: " + image);//  }}
@@ -69,7 +65,7 @@ TOKEN:{  < LEXICAL_INVALIDO:  	(~ [ 	 "a"-"z", "A"-"Z", 	 "0"-"9", 	 "[",
 | <PONTO : ".">
 | <IGUAL : "=">
 
-}TOKEN : /*CONSTANTE LITERAL*/{   <CONSTANTE_LITERAL : ("\""(~[])*"\""|"'"(~[])*"'")> }TOKEN : /*IDENTIFICADOR*//*< IDENTIFICADOR : <LETTER>(<LETTER>|"_"(<LETTER>|<DIGIT>(<LETTER>|"_"))|<DIGIT>
+}TOKEN : /*CONSTANTE LITERAL*/{   <CONSTANTE_LITERAL : ("\""(~["\""])*"\""|"'"(~["'"])*"'")> }TOKEN : /*IDENTIFICADOR*//*< IDENTIFICADOR : <LETTER>(<LETTER>|"_"(<LETTER>|<DIGIT>(<LETTER>|"_"))|<DIGIT>
   		  (<LETTER>|"_"))*|"_"(<LETTER>|<DIGIT>(<LETTER>|"_"))*>*///{//  < #LETTERM : [ "A"-"Z" ] >//| < IDENTIFICADOR : < LETTERM > (< ID >)* ("_")? >//| < ID : ( < LETTERM > | < UNDER > | < DIGIT > (< DIGIT >)? ( < LETTER > | < UNDER >) ) >//| < UNDER :  "_" (  < LETTER > | < DIGIT > (< DIGIT >)? ( < LETTER >  )  ) >//}
 
 {
@@ -116,5 +112,10 @@ void error_skipto(int kind) {
 | k = <IDENTIFICADOR_INVALIDO >
   {
     s.append("\n Identificador inválido encontrado -> " + k.image + 
+    ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);
+  }
+| k = < CONSTANTE_INVALIDA >
+  {
+    s.append("\n Constante Literal inválida encontrado -> " + k.image + 
     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);
   }}
