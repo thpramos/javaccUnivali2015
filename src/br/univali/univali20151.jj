@@ -11,9 +11,65 @@ import java.util.ArrayList;
   //Fazer description
 }
 
-//SPECIAL_TOKEN://{//  < LEXICAL_INVALIDO://  	(~ [// 	 "a"-"z", "A"-"Z",// 	 "0"-"9",// 	 "[",// 	 "]",// 	 "(",// 	 ")",// 	 ".",// 	 ",",// 	 "=",// 	 "+",// 	 "-",// 	 "*",// 	 "/",// 	 "%",// 	 "!",// 	 "<",// 	 ">",// 	 "&",// 	 "|",// 	 "!",// 	 " ",// 	 "\t",// 	 "\n",// 	 "\r",// 	 "\f"// 	 ]) >//  {//	System.err.println("Linha "+input_stream.getEndLine() + " - Entrada com simbolo inválido: " + image);//  }//| < IDENTIFICADOR_INVALIDO: (["0"-"9"]((["a"-"z","A"-"Z"])+) | "_")//		| ((["a"-"z","A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"]))//		| ((["a"-"z","A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"](["0"-"9"])+ | "_"("_")+))//		| ((["A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"]))//		| ((["A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"](["0"-"9"])+ | "_"("_")+))>//  {//  System.err.println("Linha "+input_stream.getEndLine() + " - Identificador invalido: " + image);//  }////}TOKEN :{  < CONSTANTE_NUMERICA_INTEIRA : < DIGIT > (< DIGIT >)? (< DIGIT >)? (< DIGIT >)? (< DIGIT >)? >| < CONSTANTE_NUMERICA_REAL :    (      < DIGIT > (< DIGIT >)? (< DIGIT >)? (< DIGIT >)? (< DIGIT >)? "." < DIGIT > (< DIGIT >)? (< DIGIT >)?    ) >| < #LETTER : [ "a"-"z", "A"-"Z" ] >| < #DIGIT : [ "0"-"9" ] >}TOKEN [ IGNORE_CASE ] : /*EXPRESSAO REGULAR*/{  < EXPRESSAO_REGULAR :    (      < DO >    | < THIS >    | < BODY >    | < SECTION >    | < DESCRIPTION >    | < DECLARATION >    | < DESIGNATE >    | < AS >    | < TO >    | < READ >    | < WRITE >    | < AVALIATE >    | < TRUE >    | < UNTRUE >    | < RESULT >    | < ALL >    | < CONSTANT >    | < VARIABLE >    | < IS >    | < TIPO >    | < VALOR >    | < INTEGER >    | < FLOAT >    | < STRING >    | < BOOLEAN >    | < CONCHETEE >    | < CONCHETED >    | < PARENTESEE >    | < PARENTESED >    | < PONTO >    ) >}TOKEN :{  < SIMBOLOS :    (      < CONCHETEE >    | < CONCHETED >    | < PONTO >    | < PARENTESEE >    | < PARENTESED >    ) >}TOKEN [ IGNORE_CASE ] : //EXPRESSOES REGULARES
-{  < DO : "do" >| < THIS : "this" >| < BODY : "body" >| < SECTION : "section" >| < DESCRIPTION : "description" >| < DECLARATION : "declaration" >| < DESIGNATE : "designate" >| < AS : "as" >| < TO : "to" >| < READ : "read" >| < WRITE : "write" >| < AVALIATE : "avaliate" >| < TRUE : "true" >| < UNTRUE : "untrue" >| < RESULT : "result" >| < ALL : "all" >| < CONSTANT : "constant" >| < VARIABLE : "variable" >| < IS : "is" >| <TIPO : (<STRING>|<INTEGER>|<FLOAT>|<BOOLEAN>) >
-| <VALOR : (<STRING>|<INTEGER>|<FLOAT>) >| < INTEGER : "integer" >| < STRING : "string" >| < FLOAT : "float" >| < BOOLEAN : "boolean" >| < CONCHETEE : "[" >| < CONCHETED : "]" >| < PARENTESEE : "(" >| < PARENTESED : ")" >| < PONTO : "." >}TOKEN : /*CONSTANTE LITERAL*/{   <CONSTANTE_LITERAL : ("\""(~[])*"\""|"'"(~[])*"'")> }TOKEN : /*IDENTIFICADOR*//*< IDENTIFICADOR : <LETTER>(<LETTER>|"_"(<LETTER>|<DIGIT>(<LETTER>|"_"))|<DIGIT>
+TOKEN:{  < LEXICAL_INVALIDO:  	(~ [ 	 "a"-"z", "A"-"Z", 	 "0"-"9", 	 "[", 	 "]", 	 "(", 	 ")", 	 ".", 	 ",", 	 "=", 	 "+", 	 "-", 	 "*", 	 "/", 	 "%", 	 "!", 	 "<", 	 ">", 	 "&", 	 "|", 	 "!", 	 " ", 	 "\t", 	 "\n", 	 "\r", 	 "\f" 	 ])+ >
+ | < IDENTIFICADOR_INVALIDO: (
+ 		(["0"-"9"](["a"-"z","A"-"Z","_","0"-"9"])+) /*Começa com números*/
+		|((["a"-"z","A"-"Z","0"-"9"])+ "_""_" (["a"-"z","A"-"Z","0"-"9"])+) //underlines consecutivos
+		|((["a"-"z","A"-"Z","_"])+ ["0"-"9"] (["a"-"z","A"-"Z","_"])+) //numeros consecutivos
+ ) >
+		//|(["a"-"z"](~["do","this","body","section"])+) //começa com minusculas IMPOSSIVEL
+
+//<DO : "do", "this","body", "section" >//| <DESCRIPTION : "description" >//| <DECLARATION : "declaration" >//| <DESIGNATE : "designate" >//| <AS : "as" >//| <TO : "to" >//| <READ : "read">//| <WRITE : "write">//| <AVALIATE : "avaliate">//| <TRUE : "true">//| <UNTRUE: "untrue">//| <RESULT : "result">//| <REPEAT : "repeat">//| <VIRGULA : ",">//| <ALL : "all">//| <CONSTANT : "constant" >//| <VARIABLE : "variable">//| <IS : "is">//| <TIPO : (<STRING>|<INTEGER>|<FLOAT>|<BOOLEAN>) >//| <VALOR : (<STRING>|<INTEGER>|<FLOAT>) >//| <INTEGER : "integer" >//| <STRING : "string" >//| <FLOAT : "float" >//| <BOOLEAN : "boolean" >//| <CONCHETEE : "[">//| <CONCHETED : "]">//| <PARENTESEE : "(">//| <PARENTESED : ")">//| <PONTO : ".">//| <IGUAL : "=">
+
+
+
+
+ 
+//  {//  System.err.println("Linha "+input_stream.getEndLine() + " - Identificador invalido: " + image);//  }/*| (((["a"-"z"])+(["a"-"z","A"-"Z","0"-"9"])*("_")?)) Começa com letra minuscula*/		//| ("_") /*Apenas um underline*/	//| < IDENTIFICADOR_INVALIDO: (["0"-"9"]((["a"-"z","A"-"Z"])+) | "_")//		| ((["a"-"z","A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"]))//		| ((["a"-"z","A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"](["0"-"9"])+ | "_"("_")+))//		| ((["A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"]))//		| ((["A"-"Z"] | ["a"-"z","A"-"Z"]"_" | "_")(["0"-"9"](["0"-"9"])+ | "_"("_")+))>//  {//  System.err.println("Linha "+input_stream.getEndLine() + " - Identificador invalido: " + image);//  }}
+
+
+/*TOKEN:
+{
+	< TOKEN_ELSE :( ~[<EXPRESSAO_REGULAR>|<CONSTANTE_NUMERICA > | <IDENTIFICADOR> | <CONSTANTE_LITERAL>  | <OPERADOR> | <SIMBOLOS>]) >
+}*/
+
+//TOKEN://{//  < INVALIDO://  	~[ // 	 <EXPRESSAO_REGULAR>// 	 , <CONSTANTE_NUMERICA >// 	 , <IDENTIFICADOR>// 	 , <CONSTANTE_LITERAL>// 	 , <OPERADOR>// 	 , <SIMBOLOS>// 	 ]//  >//}TOKEN :{  < CONSTANTE_NUMERICA_INTEIRA : < DIGIT > (< DIGIT >)? (< DIGIT >)? (< DIGIT >)? (< DIGIT >)? >| < CONSTANTE_NUMERICA_REAL :    (      < DIGIT > (< DIGIT >)? (< DIGIT >)? (< DIGIT >)? (< DIGIT >)? "." < DIGIT > (< DIGIT >)? (< DIGIT >)?    ) >| < #LETTER : [ "a"-"z", "A"-"Z" ] >| < #DIGIT : [ "0"-"9" ] >}TOKEN [ IGNORE_CASE ] : /*EXPRESSAO REGULAR*/{  < EXPRESSAO_REGULAR :    (      < DO >    | < THIS >    | < BODY >    | < SECTION >    | < DESCRIPTION >    | < DECLARATION >    | < DESIGNATE >    | < AS >    | < TO >    | < READ >    | < WRITE >    | < AVALIATE >    | < TRUE >    | < UNTRUE >    | < RESULT >    | < ALL >    | < CONSTANT >    | < VARIABLE >    | < IS >    | < TIPO >    | < VALOR >    | < INTEGER >    | < FLOAT >    | < STRING >    | < BOOLEAN >    | < CONCHETEE >    | < CONCHETED >    | < PARENTESEE >    | < PARENTESED >    | < PONTO >    ) >}TOKEN :{  < SIMBOLOS :    (      < CONCHETEE >    | < CONCHETED >    | < PONTO >    | < PARENTESEE >    | < PARENTESED >    ) >}TOKEN [IGNORE_CASE]: //EXPRESSOES REGULARES
+{
+   <DO : "do">
+| <THIS : "this" >
+| <BODY : "body"> 
+| <SECTION : "section" >
+| <DESCRIPTION : "description" >
+| <DECLARATION : "declaration" >
+| <DESIGNATE : "designate" >
+| <AS : "as" >
+| <TO : "to" >
+| <READ : "read">
+| <WRITE : "write">
+| <AVALIATE : "avaliate">
+| <TRUE : "true">
+| <UNTRUE: "untrue">
+| <RESULT : "result">
+| <REPEAT : "repeat">
+| <VIRGULA : ",">
+| <ALL : "all">
+| <CONSTANT : "constant" >
+| <VARIABLE : "variable">
+| <IS : "is">
+| <TIPO : (<STRING>|<INTEGER>|<FLOAT>|<BOOLEAN>) >
+| <VALOR : (<STRING>|<INTEGER>|<FLOAT>) >
+| <INTEGER : "integer" >
+| <STRING : "string" >
+| <FLOAT : "float" >
+| <BOOLEAN : "boolean" >
+| <CONCHETEE : "[">
+| <CONCHETED : "]">
+| <PARENTESEE : "(">
+| <PARENTESED : ")">
+| <PONTO : ".">
+| <IGUAL : "=">
+
+}TOKEN : /*CONSTANTE LITERAL*/{   <CONSTANTE_LITERAL : ("\""(~[])*"\""|"'"(~[])*"'")> }TOKEN : /*IDENTIFICADOR*//*< IDENTIFICADOR : <LETTER>(<LETTER>|"_"(<LETTER>|<DIGIT>(<LETTER>|"_"))|<DIGIT>
   		  (<LETTER>|"_"))*|"_"(<LETTER>|<DIGIT>(<LETTER>|"_"))*>*///{//  < #LETTERM : [ "A"-"Z" ] >//| < IDENTIFICADOR : < LETTERM > (< ID >)* ("_")? >//| < ID : ( < LETTERM > | < UNDER > | < DIGIT > (< DIGIT >)? ( < LETTER > | < UNDER >) ) >//| < UNDER :  "_" (  < LETTER > | < DIGIT > (< DIGIT >)? ( < LETTER >  )  ) >//}
 
 {
@@ -29,17 +85,7 @@ String input() :
 StringBuilder s = new StringBuilder("");
 }
 {
-	try
-	{ 
-	  (identifica(s))*	  {
-	    return s.toString();
-	  }
-	} catch (TokenMgrError e) {
-		error_skipto(PONTO);
-	}catch (ParseException e) {
-    	error_skipto(PONTO);
-  	}
-  	
+	  (identifica(s))*  {    return s.toString();  }	
   
 }
 
@@ -61,4 +107,14 @@ void error_skipto(int kind) {
     // current token is the one immediately before the erroneous token
     // (in our case the token immediately before what should have been
     // "if"/"while".
-}void identifica(StringBuilder s) :{  Token k;}{  k = < EXPRESSAO_REGULAR >  {    s.append("\n Palavra reservada -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < CONSTANTE_NUMERICA_INTEIRA >  {    s.append("\n Constante inteira -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < CONSTANTE_NUMERICA_REAL >  {    s.append("\n Constante real -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < CONSTANTE_LITERAL >  {    s.append("\n Constante literal -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < IDENTIFICADOR >  {     s.append("\n Identificador -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < OPERADOR >  {    s.append("\n Operador -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < SIMBOLOS >  {    s.append("\n Simbolo Especial -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }}
+}void identifica(StringBuilder s) :{  Token k;}{  k = < EXPRESSAO_REGULAR >  {    s.append("\n Palavra reservada -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < CONSTANTE_NUMERICA_INTEIRA >  {    s.append("\n Constante inteira -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < CONSTANTE_NUMERICA_REAL >  {    s.append("\n Constante real -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < CONSTANTE_LITERAL >  {    s.append("\n Constante literal -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < IDENTIFICADOR >  {     s.append("\n Identificador -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < OPERADOR >  {    s.append("\n Operador -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }| k = < SIMBOLOS >  {    s.append("\n Simbolo Especial -> " + k.image +     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);  }
+| k = < LEXICAL_INVALIDO >
+  {
+    s.append("\n Símbolo inválido encontrado -> " + k.image + 
+    ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);
+  }
+| k = <IDENTIFICADOR_INVALIDO >
+  {
+    s.append("\n Identificador inválido encontrado -> " + k.image + 
+    ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);
+  }}

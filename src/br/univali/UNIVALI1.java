@@ -9,31 +9,27 @@ public class UNIVALI1 implements UNIVALI1Constants {
 
   final public String input() throws ParseException {
 StringBuilder s = new StringBuilder("");
-    try {
-      label_1:
-      while (true) {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case CONSTANTE_NUMERICA_INTEIRA:
-        case CONSTANTE_NUMERICA_REAL:
-        case EXPRESSAO_REGULAR:
-        case SIMBOLOS:
-        case CONSTANTE_LITERAL:
-        case IDENTIFICADOR:
-        case OPERADOR:
-          ;
-          break;
-        default:
-          jj_la1[0] = jj_gen;
-          break label_1;
-        }
-        identifica(s);
+    label_1:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LEXICAL_INVALIDO:
+      case IDENTIFICADOR_INVALIDO:
+      case CONSTANTE_NUMERICA_INTEIRA:
+      case CONSTANTE_NUMERICA_REAL:
+      case EXPRESSAO_REGULAR:
+      case SIMBOLOS:
+      case CONSTANTE_LITERAL:
+      case IDENTIFICADOR:
+      case OPERADOR:
+        ;
+        break;
+      default:
+        jj_la1[0] = jj_gen;
+        break label_1;
       }
-            {if (true) return s.toString();}
-    } catch (TokenMgrError e) {
-                error_skipto(PONTO);
-    } catch (ParseException e) {
-        error_skipto(PONTO);
+      identifica(s);
     }
+    {if (true) return s.toString();}
     throw new Error("Missing return statement in function");
   }
 
@@ -84,6 +80,16 @@ StringBuilder s = new StringBuilder("");
     s.append("\u005cn Simbolo Especial -> " + k.image +
     ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);
       break;
+    case LEXICAL_INVALIDO:
+      k = jj_consume_token(LEXICAL_INVALIDO);
+    s.append("\u005cn S\u00edmbolo inv\u00e1lido encontrado -> " + k.image +
+    ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);
+      break;
+    case IDENTIFICADOR_INVALIDO:
+      k = jj_consume_token(IDENTIFICADOR_INVALIDO);
+    s.append("\u005cn Identificador inv\u00e1lido encontrado -> " + k.image +
+    ", na linha " + k.beginLine + " e na coluna " + k.beginColumn);
+      break;
     default:
       jj_la1[1] = jj_gen;
       jj_consume_token(-1);
@@ -108,10 +114,10 @@ StringBuilder s = new StringBuilder("");
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x1980,0x1980,};
+      jj_la1_0 = new int[] {0x6780,0x6780,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x12800,0x12800,};
+      jj_la1_1 = new int[] {0x250000,0x250000,};
    }
 
   /** Constructor with InputStream. */
@@ -228,7 +234,7 @@ StringBuilder s = new StringBuilder("");
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[52];
+    boolean[] la1tokens = new boolean[57];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -245,7 +251,7 @@ StringBuilder s = new StringBuilder("");
         }
       }
     }
-    for (int i = 0; i < 52; i++) {
+    for (int i = 0; i < 57; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

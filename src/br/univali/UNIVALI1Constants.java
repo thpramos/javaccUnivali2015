@@ -15,95 +15,105 @@ public interface UNIVALI1Constants {
   /** RegularExpression Id. */
   int COMMENT_BLOCK = 6;
   /** RegularExpression Id. */
-  int CONSTANTE_NUMERICA_INTEIRA = 7;
+  int LEXICAL_INVALIDO = 7;
   /** RegularExpression Id. */
-  int CONSTANTE_NUMERICA_REAL = 8;
+  int IDENTIFICADOR_INVALIDO = 8;
   /** RegularExpression Id. */
-  int LETTER = 9;
+  int CONSTANTE_NUMERICA_INTEIRA = 9;
   /** RegularExpression Id. */
-  int DIGIT = 10;
+  int CONSTANTE_NUMERICA_REAL = 10;
   /** RegularExpression Id. */
-  int EXPRESSAO_REGULAR = 11;
+  int LETTER = 11;
   /** RegularExpression Id. */
-  int SIMBOLOS = 12;
+  int DIGIT = 12;
   /** RegularExpression Id. */
-  int DO = 13;
+  int EXPRESSAO_REGULAR = 13;
   /** RegularExpression Id. */
-  int THIS = 14;
+  int SIMBOLOS = 14;
   /** RegularExpression Id. */
-  int BODY = 15;
+  int DO = 15;
   /** RegularExpression Id. */
-  int SECTION = 16;
+  int THIS = 16;
   /** RegularExpression Id. */
-  int DESCRIPTION = 17;
+  int BODY = 17;
   /** RegularExpression Id. */
-  int DECLARATION = 18;
+  int SECTION = 18;
   /** RegularExpression Id. */
-  int DESIGNATE = 19;
+  int DESCRIPTION = 19;
   /** RegularExpression Id. */
-  int AS = 20;
+  int DECLARATION = 20;
   /** RegularExpression Id. */
-  int TO = 21;
+  int DESIGNATE = 21;
   /** RegularExpression Id. */
-  int READ = 22;
+  int AS = 22;
   /** RegularExpression Id. */
-  int WRITE = 23;
+  int TO = 23;
   /** RegularExpression Id. */
-  int AVALIATE = 24;
+  int READ = 24;
   /** RegularExpression Id. */
-  int TRUE = 25;
+  int WRITE = 25;
   /** RegularExpression Id. */
-  int UNTRUE = 26;
+  int AVALIATE = 26;
   /** RegularExpression Id. */
-  int RESULT = 27;
+  int TRUE = 27;
   /** RegularExpression Id. */
-  int ALL = 28;
+  int UNTRUE = 28;
   /** RegularExpression Id. */
-  int CONSTANT = 29;
+  int RESULT = 29;
   /** RegularExpression Id. */
-  int VARIABLE = 30;
+  int REPEAT = 30;
   /** RegularExpression Id. */
-  int IS = 31;
+  int VIRGULA = 31;
   /** RegularExpression Id. */
-  int TIPO = 32;
+  int ALL = 32;
   /** RegularExpression Id. */
-  int VALOR = 33;
+  int CONSTANT = 33;
   /** RegularExpression Id. */
-  int INTEGER = 34;
+  int VARIABLE = 34;
   /** RegularExpression Id. */
-  int STRING = 35;
+  int IS = 35;
   /** RegularExpression Id. */
-  int FLOAT = 36;
+  int TIPO = 36;
   /** RegularExpression Id. */
-  int BOOLEAN = 37;
+  int VALOR = 37;
   /** RegularExpression Id. */
-  int CONCHETEE = 38;
+  int INTEGER = 38;
   /** RegularExpression Id. */
-  int CONCHETED = 39;
+  int STRING = 39;
   /** RegularExpression Id. */
-  int PARENTESEE = 40;
+  int FLOAT = 40;
   /** RegularExpression Id. */
-  int PARENTESED = 41;
+  int BOOLEAN = 41;
   /** RegularExpression Id. */
-  int PONTO = 42;
+  int CONCHETEE = 42;
   /** RegularExpression Id. */
-  int CONSTANTE_LITERAL = 43;
+  int CONCHETED = 43;
   /** RegularExpression Id. */
-  int LETTERM = 44;
+  int PARENTESEE = 44;
   /** RegularExpression Id. */
-  int IDENTIFICADOR = 45;
+  int PARENTESED = 45;
   /** RegularExpression Id. */
-  int ID = 46;
+  int PONTO = 46;
   /** RegularExpression Id. */
-  int UNDER = 47;
+  int IGUAL = 47;
   /** RegularExpression Id. */
-  int OPERADOR = 48;
+  int CONSTANTE_LITERAL = 48;
   /** RegularExpression Id. */
-  int OPERADOR_ARITMETICO = 49;
+  int LETTERM = 49;
   /** RegularExpression Id. */
-  int OPERADOR_RELACIONAL = 50;
+  int IDENTIFICADOR = 50;
   /** RegularExpression Id. */
-  int OPERADOR_LOGICO = 51;
+  int ID = 51;
+  /** RegularExpression Id. */
+  int UNDER = 52;
+  /** RegularExpression Id. */
+  int OPERADOR = 53;
+  /** RegularExpression Id. */
+  int OPERADOR_ARITMETICO = 54;
+  /** RegularExpression Id. */
+  int OPERADOR_RELACIONAL = 55;
+  /** RegularExpression Id. */
+  int OPERADOR_LOGICO = 56;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -117,6 +127,8 @@ public interface UNIVALI1Constants {
     "\"\\n\"",
     "<COMMENT>",
     "<COMMENT_BLOCK>",
+    "<LEXICAL_INVALIDO>",
+    "<IDENTIFICADOR_INVALIDO>",
     "<CONSTANTE_NUMERICA_INTEIRA>",
     "<CONSTANTE_NUMERICA_REAL>",
     "<LETTER>",
@@ -138,6 +150,8 @@ public interface UNIVALI1Constants {
     "\"true\"",
     "\"untrue\"",
     "\"result\"",
+    "\"repeat\"",
+    "\",\"",
     "\"all\"",
     "\"constant\"",
     "\"variable\"",
@@ -153,6 +167,7 @@ public interface UNIVALI1Constants {
     "\"(\"",
     "\")\"",
     "\".\"",
+    "\"=\"",
     "<CONSTANTE_LITERAL>",
     "<LETTERM>",
     "<IDENTIFICADOR>",
